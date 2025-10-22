@@ -153,7 +153,7 @@
                     </button>
                     <div class="accordion-content px-5 pb-5">
                         <p class="text-gray-700 mt-2">Em equipamentos institucionais, a instalação de softwares é uma atribuição <strong>exclusiva da equipe de TI</strong>.</p>
-                        <p class="text-gray-700 mt-2">Se você precisa de um programa específico para seu trabalho ou estudo, abra um chamado no SUAP (ou sistema equivalente) solicitando a instalação. Softwares não licenciados ou piratas são <strong>proibidos</strong>.</p>
+                        <p class="text-gray-700 mt-2">Se você precisa de um programa específico para seu trabalho ou estudo, abra um chamado no sistema de chamados local (geralmente o GLPI, ou sistema equivalente) solicitando a instalação. Softwares não licenciados ou piratas são <strong>proibidos</strong>.</p>
                     </div>
                 </div>
 
