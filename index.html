@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Política de Uso Aceitável de Estações de Trabalho - IFSP</title>
+    <!-- Carrega o Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Carrega a fonte Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Configuração de cores e estilos customizados -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f4f5; /* zinc-100 */
+        }
+
+        /* Cores da Identidade Visual do IFSP */
+        :root {
+            --ifsp-verde: #008040;
+            --ifsp-verde-escuro: #004020;
+            --ifsp-cinza: #333333;
+        }
+
+        /* Estilo para o cabeçalho padrão reutilizável */
+        .ifsp-header {
+            background: linear-gradient(135deg, var(--ifsp-verde), var(--ifsp-verde-escuro));
+            color: white;
+            padding: 2.5rem 1.5rem;
+            border-bottom-left-radius: 2rem;
+            border-bottom-right-radius: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        .ifsp-logo-svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1rem;
+        }
+
+        /* Estilo para os cards do FAQ (Accordion) */
+        details {
+            background-color: white;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); /* shadow-md */
+            margin-bottom: 1rem;
+            transition: all 0.2s ease-in-out;
+        }
+
+        details:hover {
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-lg */
+        }
+
+        details[open] {
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-lg */
+        }
+
+        summary {
+            padding: 1.25rem 1.5rem;
+            font-weight: 600; /* semibold */
+            color: var(--ifsp-cinza);
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        /* Seta do accordion */
+        summary::after {
+            content: '+';
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--ifsp-verde);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        details[open] summary::after {
+            content: '−';
+        }
+
+
+        .faq-content {
+            padding: 0 1.5rem 1.25rem 1.5rem;
+            color: #3f3f46; /* zinc-700 */
+            line-height: 1.6;
+        }
+
+        .faq-content p {
+            margin-bottom: 0.75rem;
+        }
+
+        /* Estilo para o highlight da busca */
+        .highlight {
+            background-color: #fef08a; /* yellow-200 */
+            padding: 0 2px;
+            border-radius: 3px;
+            font-weight: 600;
+            color: #713f12; /* yellow-900 */
+        }
+
+        /* Botão principal */
+        .btn-primary {
+            background-color: var(--ifsp-verde);
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem; /* rounded-lg */
+            text-align: center;
+            display: inline-block;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--ifsp-verde-escuro);
+        }
+
+        /* Input de busca */
+        #searchInput {
+            border: 2px solid #e4e4e7; /* zinc-200 */
+            border-radius: 0.5rem; /* rounded-lg */
+            padding: 0.75rem 1.25rem;
+            width: 100%;
+            font-size: 1rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        #searchInput:focus {
+            outline: none;
+            border-color: var(--ifsp-verde);
+            box-shadow: 0 0 0 3px rgba(0, 128, 64, 0.2);
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- HEADER -->
+    <header class="ifsp-header">
+	
+    <!-- Bloco NOVO com a Imagem -->
+    <img src="./img/logo-ifsp.png"
+        alt="Logo do IFSP"
+        class="ifsp-logo-svg"
+        onerror="this.onerror=null; this.src='https://placehold.co/80x80/008040/FFFFFF?text=IFSP';">
+        <h1 class="text-2xl sm:text-3xl font-bold mb-2">Política de Uso Aceitável de Estações de Trabalho</h1>
+        <p class="text-lg opacity-90">Tudo o que você precisa saber (Perguntas Frequentes)</p>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-4xl mx-auto p-4 sm:p-8">
+
+        <!-- SEARCH SECTION -->
+        <div class="mb-8">
+            <label for="searchInput" class="block text-lg font-semibold text-gray-800 mb-3">Tem alguma dúvida?</label>
+            <input type="search" id="searchInput" placeholder="Busque por 'backup', 'senha', 'pen drive'..." autocomplete="off">
+            <p id="noResultsMessage" class="text-center text-gray-500 mt-6" style="display: none;">Nenhum resultado encontrado para sua busca.</p>
+        </div>
+
+        <!-- FAQ CONTAINER -->
+        <div id="faqContainer">
+
+            <!-- Categoria: Geral e Responsabilidades -->
+            <h2 class="text-2xl font-bold text-[var(--ifsp-verde-escuro)] mb-4">Geral e Responsabilidades</h2>
+
+            <details class="faq-item">
+                <summary>O que é esta Política e para quem ela vale?</summary>
+                <div class="faq-content">
+                    <p>É um guia oficial de regras para usar de forma segura e ética os equipamentos de TI (computadores, notebooks, celulares) conectados aos recursos do IFSP.</p>
+                    <p>Ela vale para <strong>TODOS</strong> (Art. 2º): servidores (docentes e TAEs), estudantes, pesquisadores, estagiários e funcionários de empresas prestadoras de serviço.</p>
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Quem é o responsável pelo backup dos meus arquivos no computador do IFSP?</summary>
+                <div class="faq-content">
+                    <p><strong>VOCÊ, o usuário.</strong> O Art. 8º é muito claro: a responsabilidade por fazer cópias de segurança (backup) de arquivos salvos localmente (na área de trabalho, "Meus Documentos" ou Drive C:) é <strong>integralmente do usuário</strong>.</p>
+                    <p>O IFSP não faz backup automático de computadores individuais e não se responsabiliza pela perda desses dados. A recomendação é: <strong>Use o Google Drive institucional</strong> (Art. 9º) para salvar seus arquivos de trabalho.</p>
+                    <!-- Botão AI removido -->
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Meu notebook do IFSP foi perdido ou roubado. O que eu faço?</summary>
+                <div class="faq-content">
+                    <p>Você deve agir em duas frentes <strong>imediatamente</strong> (Art. 17º):</p>
+                    <ol class="list-decimal list-inside ml-4">
+                        <li>Comunicar o setor de TI da sua unidade (campus ou Reitoria).</li>
+                        <li>Registrar um <strong>Boletim de Ocorrência (BO)</strong> junto à autoridade policial local.</li>
+                    </ol>
+                    <p>Se for apenas uma suspeita de vírus ou acesso indevido (comprometimento lógico), comunique apenas a TI e desconecte o equipamento da rede.</p>
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>O computador do IFSP quebrou. Posso levar no técnico da minha confiança?</summary>
+                <div class="faq-content">
+                    <p><strong>NÃO.</strong> A manutenção de equipamentos institucionais (Art. 18º) só pode ser realizada pela <strong>equipe de TI do IFSP</strong> ou por empresas terceirizadas devidamente autorizadas pela TI.</p>
+                    <p>Levar o equipamento em um local não autorizado pode causar mais danos, perda da garantia e você poderá ser responsabilizado por isso.</p>
+                    <!-- Botão AI removido -->
+                </div>
+            </details>
+
+            <!-- Categoria: Segurança no Dia a Dia -->
+            <h2 class="text-2xl font-bold text-[var(--ifsp-verde-escuro)] mt-8 mb-4">Segurança no Dia a Dia</h2>
+
+            <details class="faq-item">
+                <summary>Achei um pen drive "perdido" no corredor. Posso espetar no computador para ver o que é?</summary>
+                <div class="faq-content">
+                    <p><strong>NÃO! NUNCA!</strong></p>
+                    <p>O Art. 49º é claro: É expressamente <strong>VEDADO</strong> conectar a equipamentos institucionais qualquer dispositivo USB (pen drive, HD externo, celular) de <strong>origem desconhecida, não confiável ou duvidosa</strong>.</p>
+                    <p>Isso representa um risco de segurança gravíssimo, pois o dispositivo pode conter ataques (como "BadUSB" ou "Juice Jacking") que instalam vírus, roubam dados ou assumem o controle do seu computador sem que você perceba.</p>
+                    <!-- Botão AI removido -->
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Posso emprestar minha senha do SUAP ou do e-mail para um colega?</summary>
+                <div class="faq-content">
+                    <p><strong>NÃO.</strong> O Art. 5º desta política estabelece que suas credenciais (usuário e senha) são <strong>individuais, pessoais e intransferíveis</strong>.</p>
+                    <p>Você é o único responsável legal por todas as ações realizadas com o seu usuário.</p>
+                    <!-- Botão AI removido -->
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Preciso mesmo bloquear o computador toda vez que saio da minha mesa?</summary>
+                <div class="faq-content">
+                    <p><strong>SIM.</strong> O Art. 7º torna <strong>obrigatório</strong> o uso de bloqueio de tela (com senha, PIN ou biometria) em todas as estações de trabalho. Esse bloqueio deve ser ativado <strong>sempre</strong> que o dispositivo for deixado desassistido, mesmo que por "só um minutinho".</p>
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Recebi um e-mail URGENTE pedindo minha senha. O que eu faço?</summary>
+                <div class="faq-content">
+                    <p><strong>IGNORE, NÃO CLIQUE E REPORTE À TI.</strong> Isso é um golpe (Art. 7º, § 6º), conhecido como <strong>Phishing</strong> ou Engenharia Social.</p>
+                    <p>Lembre-se: O IFSP, bancos ou qualquer serviço sério <strong>NUNCA</strong> pedirão sua senha por e-mail, mensagem ou telefone. Desconfie sempre de mensagens com senso de urgência, que pedem dados confidenciais ou que vêm de remetentes estranhos.</p>
+                    <!-- Botão AI removido -->
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Posso instalar o TeamViewer, AnyDesk ou outro programa de acesso remoto?</summary>
+                <div class="faq-content">
+                    <p><strong>NÃO.</strong> É expressamente **PROIBIDO** (Art. 53º, Inciso IX) instalar softwares de acesso ou compartilhamento remoto que não sejam os <strong>oficialmente homologados (aprovados) e gerenciados pela equipe de TI</strong> do IFSP.</p>
+                    <p>O suporte técnico remoto da TI (Art. 15º) só pode ser feito pelas ferramentas oficiais e seguras da instituição.</p>
+                </div>
+            </details>
+
+            <!-- Categoria: Softwares, Dados e Dispositivos Pessoais (BYOD) -->
+            <h2 class="text-2xl font-bold text-[var(--ifsp-verde-escuro)] mt-8 mb-4">Softwares, Dados e Dispositivos Pessoais (BYOD)</h2>
+
+            <details class="faq-item">
+                <summary>Posso instalar um programa (software) no meu computador do IFSP?</summary>
+                <div class="faq-content">
+                    <p><strong>NÃO.</strong> A instalação de softwares em equipamentos institucionais é uma atribuição <strong>exclusiva do setor de TI</strong> (Art. 12º).</p>
+                    <p>É proibido instalar softwares não licenciados ("piratas"), que não tenham finalidade institucional ou que não tenham sido aprovados pela TI.</p>
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Posso usar o ChatGPT (ou outra IA) para analisar um documento com dados pessoais de alunos?</summary>
+                <div class="faq-content">
+                    <p><strong>NÃO.</strong> O Art. 13º é explícito: É <strong>VEDADO</strong> o envio de informações confidenciais, dados pessoais ou tecnicamente sensíveis para <strong>serviços de Inteligência Artificial não homologados (aprovados) pelo IFSP</strong>.</p>
+                    <p>O mesmo vale para o Art. 53º (Inciso VIII), que proíbe inserir dados pessoais ou confidenciais em IAs de uso particular.</p>
+                    <!-- Botão AI removido -->
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Posso usar meu notebook ou celular pessoal para acessar o e-mail e os sistemas do IFSP?</summary>
+                <div class="faq-content">
+                    <p><strong>SIM.</strong> Isso é o modelo "Traga Seu Próprio Dispositivo" (BYOD), permitido pela política (Art. 23º). No entanto, ao configurar sua conta institucional, você concorda que seu dispositivo deve ter <strong>políticas mínimas de segurança</strong> (como senha, PIN ou biometria para bloqueio de tela).</p>
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Se meu notebook pessoal quebrar, a TI do IFSP conserta?</summary>
+                <div class="faq-content">
+                    <p><strong>NÃO.</strong> O Art. 25º define que o suporte de TI para dispositivos pessoais é <strong>limitado</strong> à orientação na configuração de acesso aos serviços institucionais (e-mail, VPN, etc.).</p>
+                    <p>A TI <strong>não</strong> conserta problemas de hardware, sistema operacional ou aplicativos pessoais do seu dispositivo.</p>
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Posso baixar planilhas com dados sigilosos no meu computador pessoal?</summary>
+                <div class="faq-content">
+                    <p><strong>NÃO.</strong> É <strong>VEDADO</strong> (Art. 24º) o download e o armazenamento local <strong>permanente</strong> de Dados Institucionais confidenciais ou Dados Pessoais Sensíveis em dispositivos pessoais.</p>
+                    <p>A regra é: acesse e manipule essas informações exclusivamente online, por meio das plataformas aprovadas (como o Google Drive ou sistemas institucionais via VPN).</p>
+                    <!-- Botão AI removido -->
+                </div>
+            </details>
+
+            <!-- Categoria: Proibições e Penalidades -->
+            <h2 class="text-2xl font-bold text-[var(--ifsp-verde-escuro)] mt-8 mb-4">Proibições e Penalidades</h2>
+
+            <details class="faq-item">
+                <summary>O que é terminantemente PROIBIDO fazer com os recursos de TI?</summary>
+                <div class="faq-content">
+                    <p>O Art. 53º lista várias proibições. As principais são:</p>
+                    <ul class="list-disc list-inside ml-4 space-y-2">
+                        <li>Acessar, armazenar ou distribuir material de natureza ilegal (pornográfica, racista, difamatória, etc.).</li>
+                        <li>Instalar equipamentos de rede particulares (roteadores, switches) na rede do IFSP.</li>
+                        <li>Realizar atividades com fins comerciais ou político-partidários.</li>
+                        <li>Tentar realizar qualquer tipo de ataque cibernético ou varredura de vulnerabilidades.</li>
+                        <li>Instalar softwares de acesso remoto não homologados (TeamViewer, AnyDesk, etc.).</li>
+                        <li>Inserir dados confidenciais ou pessoais em plataformas de IA não aprovadas.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>O que acontece se eu não seguir essas regras?</summary>
+                <div class="faq-content">
+                    <p>O descumprimento das regras é uma infração grave (Art. 54º e 55º). O usuário estará sujeito à <strong>apuração de responsabilidade</strong> e à aplicação das sanções cabíveis.</p>
+                    <p>Para servidores, isso segue o Regime Jurídico Único (Lei nº 8.112/90). Para estudantes, segue o Regime Disciplinar Discente, garantindo sempre o direito ao contraditório e à ampla defesa.</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Link para a Política Completa -->
+        <div class="mt-12 text-center">
+            <p class="text-lg text-gray-700 mb-4">Este é apenas um resumo. Para detalhes, exceções e todas as regras, é fundamental ler o documento completo.</p>
+            <a href="https://docs.google.com/document/d/1SZdoZhhV9J1MXlJ9sd8WCNSODnY9Jr3ZocDaf4mG9tQ/edit?usp=sharing"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="btn-primary text-lg">
+                Acessar a Política Completa (PDF)
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Modal removido -->
+
+    <!-- Footer -->
+    <footer class="text-center p-6 mt-10 border-t border-gray-200">
+        <p class="text-sm text-gray-500">Instituto Federal de Educação, Ciência e Tecnologia de São Paulo (IFSP)</p>
+         <!-- Referência Gemini removida -->
+    </footer>
+
+    <!-- Script de Busca e Highlight (sem Gemini) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('searchInput');
+            const faqContainer = document.getElementById('faqContainer');
+            const noResultsMessage = document.getElementById('noResultsMessage');
+            const faqItems = faqContainer.querySelectorAll('.faq-item');
+
+            // --- Lógica de Busca e Highlight ---
+            const originalTexts = new Map();
+            faqItems.forEach((item, index) => {
+                 // Armazena o HTML INTERNO dos elementos
+                originalTexts.set(index, {
+                    summary: item.querySelector('summary').innerHTML,
+                    content: item.querySelector('.faq-content').innerHTML
+                });
+            });
+
+            function highlightText(html, searchTerm) {
+                 if (!searchTerm) {
+                    return html;
+                 }
+                 const safeSearchTerm = searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                 const regex = new RegExp(safeSearchTerm, 'gi');
+
+                 // Estratégia: Iterar pelos nós de texto para aplicar o highlight
+                 const tempDiv = document.createElement('div');
+                 tempDiv.innerHTML = html;
+
+                 const walker = document.createTreeWalker(tempDiv, NodeFilter.SHOW_TEXT, null, false);
+                 let node;
+                 const nodesToReplace = [];
+
+                 while (node = walker.nextNode()) {
+                     // Verifica se o nó pai não é um script ou style para evitar problemas
+                     if (node.parentNode && node.parentNode.tagName.toLowerCase() !== 'script' && node.parentNode.tagName.toLowerCase() !== 'style') {
+                         if (node.nodeValue.toLowerCase().includes(searchTerm)) {
+                             const newNodeValue = node.nodeValue.replace(regex, '<mark class="highlight">$&</mark>');
+                             nodesToReplace.push({ oldNode: node, newNodeHTML: newNodeValue });
+                         }
+                     }
+                 }
+
+                 nodesToReplace.forEach(({ oldNode, newNodeHTML }) => {
+                    const span = document.createElement('span');
+                    span.innerHTML = newNodeHTML;
+                    try { // Adiciona try-catch para robustez
+                        if(oldNode.parentNode) {
+                            oldNode.parentNode.replaceChild(span, oldNode);
+                            while (span.firstChild) {
+                                span.parentNode.insertBefore(span.firstChild, span);
+                            }
+                            span.parentNode.removeChild(span);
+                        }
+                    } catch (e) {
+                        console.error("Erro ao substituir nó de texto durante highlight:", e);
+                        // Se der erro, tenta restaurar o conteúdo original para evitar quebra
+                         const detailsElement = oldNode.closest('.faq-item');
+                         if(detailsElement){
+                             const index = Array.from(faqItems).indexOf(detailsElement);
+                             const original = originalTexts.get(index);
+                             if(original && detailsElement.querySelector('summary') && detailsElement.querySelector('.faq-content')){
+                                 detailsElement.querySelector('summary').innerHTML = original.summary;
+                                 detailsElement.querySelector('.faq-content').innerHTML = original.content;
+                             }
+                         }
+                    }
+                 });
+
+                 return tempDiv.innerHTML;
+            }
+
+
+            function resetHighlights() {
+                faqItems.forEach((item, index) => {
+                    const original = originalTexts.get(index);
+                    if(original) {
+                        const summaryEl = item.querySelector('summary');
+                        const contentEl = item.querySelector('.faq-content');
+                        // Verifica se os elementos existem antes de tentar alterar o innerHTML
+                        if (summaryEl) summaryEl.innerHTML = original.summary;
+                        if (contentEl) contentEl.innerHTML = original.content;
+                    }
+                });
+            }
+
+
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.trim().toLowerCase();
+                let itemsFound = 0;
+
+                resetHighlights(); // Reseta primeiro
+
+                 if (searchTerm.length === 0) {
+                     faqItems.forEach(item => item.style.display = 'block');
+                     noResultsMessage.style.display = 'none';
+                     return;
+                 } else if (searchTerm.length < 2) {
+                     faqItems.forEach(item => item.style.display = 'block');
+                     noResultsMessage.style.display = 'none';
+                     return;
+                 }
+
+
+                faqItems.forEach((item, index) => {
+                    const summary = item.querySelector('summary');
+                    const content = item.querySelector('.faq-content');
+                    const original = originalTexts.get(index);
+
+                    // Verifica se os elementos summary e content existem
+                    if (!summary || !content) return; // Pula este item se algo estiver faltando
+
+                    const summaryText = summary.textContent.toLowerCase();
+                    const contentText = content.textContent.toLowerCase();
+
+                    if (summaryText.includes(searchTerm) || contentText.includes(searchTerm)) {
+                        item.style.display = 'block';
+                        itemsFound++;
+                        if(original){
+                            try { // Adiciona try-catch para robustez
+                                summary.innerHTML = highlightText(original.summary, searchTerm);
+                                content.innerHTML = highlightText(original.content, searchTerm);
+                            } catch (e) {
+                                 console.error("Erro ao aplicar highlight:", e);
+                                 // Restaura o original em caso de erro
+                                 summary.innerHTML = original.summary;
+                                 content.innerHTML = original.content;
+                            }
+                        }
+
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                noResultsMessage.style.display = (itemsFound === 0 && searchTerm) ? 'block' : 'none';
+            });
+        });
+    </script>
+
+</body>
+</html>
