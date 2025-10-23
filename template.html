@@ -11,6 +11,11 @@
 </head>
 <body class="antialiased">
 
+    <!-- Skip Links -->
+    <a href="#main" class="skip-link">Pular para conteúdo principal</a>
+    <a href="#nav" class="skip-link">Pular para navegação</a>
+    <a href="#search" class="skip-link">Pular para busca</a>
+
     <header class="ifsp-header">
         <a href="https://www.ifsp.edu.br" target="_blank" rel="noopener noreferrer" title="Ir para o site do IFSP">
              <img src="../assets/images/logo-ifsp.png" alt="Logo do IFSP" class="ifsp-logo-svg">
@@ -20,7 +25,7 @@
     </header>
 
     <!-- Navigation Menu -->
-    <nav class="policy-nav" role="navigation" aria-label="Navegação principal">
+    <nav class="policy-nav" role="navigation" aria-label="Navegação principal" id="nav">
         <div class="nav-container">
             <a href="../index.html" class="nav-home-link" aria-label="Voltar para a página inicial">
                 <span class="nav-icon">🏠</span>
@@ -53,10 +58,12 @@
         </div>
     </nav>
 
-    <main>
+    <main id="main">
         <div class="mb-8">
             <label for="searchInput" class="block text-lg font-semibold text-gray-800 mb-3">Tem alguma dúvida?</label>
-            <input type="search" id="searchInput" placeholder="Busque por..." autocomplete="off">
+            <div class="search-input-container">
+                <input type="search" id="searchInput" placeholder="Busque por..." autocomplete="off">
+            </div>
             <p id="noResultsMessage" class="text-center text-gray-500 mt-6" style="display: none;">Nenhum resultado encontrado.</p>
         </div>
 

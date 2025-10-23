@@ -11,6 +11,11 @@
 </head>
 <body class="antialiased">
 
+    <!-- Skip Links -->
+    <a href="#main" class="skip-link">Pular para conteúdo principal</a>
+    <a href="#nav" class="skip-link">Pular para navegação</a>
+    <a href="#search" class="skip-link">Pular para busca</a>
+
     <header class="ifsp-header">
         <a href="https://www.ifsp.edu.br" target="_blank" rel="noopener noreferrer" title="Ir para o site do IFSP">
             <img src="../assets/images/logo-ifsp.png" alt="Logo do IFSP" class="ifsp-logo-svg">
@@ -20,7 +25,7 @@
     </header>
 
     <!-- Navigation Menu -->
-    <nav class="policy-nav" role="navigation" aria-label="Navegação principal">
+    <nav class="policy-nav" role="navigation" aria-label="Navegação principal" id="nav">
         <div class="nav-container">
             <a href="../index.html" class="nav-home-link" aria-label="Voltar para a página inicial">
                 <span class="nav-icon">🏠</span>
@@ -53,17 +58,19 @@
         </div>
     </nav>
 
-    <main class="max-w-4xl mx-auto p-4 sm:p-8" role="main">
+    <main class="max-w-4xl mx-auto p-4 sm:p-8" role="main" id="main">
         <!-- Search Section -->
-        <section class="search-card" role="search" aria-labelledby="search-title">
+        <section class="search-card" role="search" aria-labelledby="search-title" id="search">
             <div class="search-card-content">
                 <h2 id="search-title" class="search-title">Tem alguma dúvida?</h2>
-                <input type="search" 
-                       id="searchInput" 
-                       placeholder="Busque por 'ChatGPT', 'dados pessoais', 'plágio'..." 
-                       autocomplete="off"
-                       aria-label="Buscar nas perguntas frequentes"
-                       role="searchbox">
+                <div class="search-input-container">
+                    <input type="search" 
+                           id="searchInput" 
+                           placeholder="Busque por 'ChatGPT', 'dados pessoais', 'plágio'..." 
+                           autocomplete="off"
+                           aria-label="Buscar nas perguntas frequentes"
+                           role="searchbox">
+                </div>
                 <p id="noResultsMessage" class="text-center text-gray-500 mt-6" style="display: none;" role="alert" aria-live="polite">Nenhum resultado encontrado.</p>
             </div>
         </section>

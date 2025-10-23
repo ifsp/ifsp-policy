@@ -471,59 +471,220 @@ details[open] summary::after {
     text-align: center;      /* Garante que o texto dentro do parágrafo também fique centralizado */
 }
 
-/* === FOOTER === */
-footer {
-    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
-    border-top: 2px solid var(--ifsp-verde);
-    margin-top: 3rem;
-}
-
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 3rem 2rem 2rem;
-    color: #374151;
-    font-size: 0.95rem;
-    line-height: 1.7;
-    text-align: center;
-}
-
-.footer-container strong {
-    color: var(--ifsp-verde-escuro);
-    font-weight: 600;
-    font-size: 1.1rem;
-    display: block;
-    margin-bottom: 1rem;
-}
-
-.copyright-line {
-    margin: 0.75rem 0;
-    color: #6b7280;
-}
-
-.copyright-line a {
-    color: var(--ifsp-verde);
+/* === SKIP LINKS === */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: var(--ifsp-verde-escuro);
+    color: white;
+    padding: 8px 16px;
     text-decoration: none;
+    border-radius: 4px;
+    z-index: 1000;
     font-weight: 500;
-    transition: color 0.2s ease;
+    transition: top 0.2s ease;
 }
 
-.copyright-line a:hover {
-    color: var(--ifsp-verde-escuro);
-    text-decoration: underline;
+.skip-link:focus {
+    top: 6px;
+    outline: 2px solid white;
+    outline-offset: 2px;
 }
 
-.ai-declaration {
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
+/* === VIRTUAL KEYBOARD === */
+.virtual-keyboard {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 2px solid var(--ifsp-verde);
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    margin-bottom: 8px;
+    display: none;
+}
+
+.virtual-keyboard.show {
+    display: block;
+}
+
+.keyboard-row {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 4px;
+}
+
+.keyboard-row:last-child {
+    margin-bottom: 0;
+}
+
+.keyboard-key {
+    min-width: 36px;
+    height: 36px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    background: white;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+    user-select: none;
+}
+
+.keyboard-key:hover {
+    background: #f3f4f6;
+    border-color: var(--ifsp-verde);
+}
+
+.keyboard-key:active {
+    background: var(--ifsp-verde);
+    color: white;
+    transform: scale(0.95);
+}
+
+.keyboard-key:focus {
+    outline: 2px solid var(--ifsp-verde);
+    outline-offset: 2px;
+}
+
+.keyboard-key.special {
+    background: #f9fafb;
+    border-color: #d1d5db;
+    font-size: 12px;
+}
+
+.keyboard-key.space {
+    min-width: 120px;
+}
+
+.keyboard-key.backspace {
+    min-width: 60px;
+}
+
+.keyboard-key.enter {
+    min-width: 60px;
+    background: var(--ifsp-verde);
+    color: white;
+}
+
+.keyboard-key.enter:hover {
+    background: var(--ifsp-verde-escuro);
+}
+
+/* === IMPROVED FOCUS INDICATORS === */
+*:focus-visible {
+    outline: 2px solid var(--ifsp-verde);
+    outline-offset: 2px;
+}
+
+/* Remove default focus for mouse users */
+*:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* === BETTER NAVIGATION ACCESSIBILITY === */
+.nav-dropdown-content {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+}
+
+.nav-dropdown-content[aria-hidden="false"] {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* === IMPROVED DETAILS/SUMMARY === */
+details.faq-item {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    overflow: hidden;
+}
+
+details.faq-item summary {
+    padding: 16px 20px;
+    background: #f9fafb;
+    cursor: pointer;
+    font-weight: 600;
+    color: #111827;
+    transition: background-color 0.2s ease;
+    list-style: none;
+}
+
+details.faq-item summary:hover {
+    background: #f3f4f6;
+}
+
+details.faq-item summary:focus {
+    outline: 2px solid var(--ifsp-verde);
+    outline-offset: 2px;
+}
+
+details.faq-item summary::marker {
+    display: none;
+}
+
+details.faq-item summary::before {
+    content: "▶";
+    display: inline-block;
+    margin-right: 12px;
+    transition: transform 0.2s ease;
+    color: var(--ifsp-verde);
+}
+
+details.faq-item[open] summary::before {
+    transform: rotate(90deg);
+}
+
+details.faq-item .faq-content {
+    padding: 16px 20px;
     border-top: 1px solid #e5e7eb;
-    color: #9ca3af;
-    font-size: 0.85rem;
-    font-style: italic;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.6;
+    background: white;
+}
+
+/* === IMPROVED SEARCH ACCESSIBILITY === */
+.search-card {
+    position: relative;
+}
+
+.search-input-container {
+    position: relative;
+}
+
+.virtual-keyboard-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--ifsp-verde);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    font-size: 18px;
+    transition: background-color 0.2s ease;
+}
+
+.virtual-keyboard-toggle:hover {
+    background: rgba(34, 197, 94, 0.1);
+}
+
+.virtual-keyboard-toggle:focus {
+    outline: 2px solid var(--ifsp-verde);
+    outline-offset: 2px;
 }
 
 /* === TABLE OF CONTENTS === */
@@ -601,4 +762,59 @@ footer {
 .toc-link:focus {
     outline: 2px solid var(--ifsp-verde);
     outline-offset: 2px;
+}
+
+/* === FOOTER === */
+footer {
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+    border-top: 2px solid var(--ifsp-verde);
+    margin-top: 3rem;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem 2rem;
+    color: #374151;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    text-align: center;
+}
+
+.footer-container strong {
+    color: var(--ifsp-verde-escuro);
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.copyright-line {
+    margin: 0.75rem 0;
+    color: #6b7280;
+}
+
+.copyright-line a {
+    color: var(--ifsp-verde);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.copyright-line a:hover {
+    color: var(--ifsp-verde-escuro);
+    text-decoration: underline;
+}
+
+.ai-declaration {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+    color: #9ca3af;
+    font-size: 0.85rem;
+    font-style: italic;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
 }

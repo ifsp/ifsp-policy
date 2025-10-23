@@ -43,6 +43,11 @@
 </head>
 <body class="antialiased">
 
+    <!-- Skip Links -->
+    <a href="#main" class="skip-link">Pular para conteúdo principal</a>
+    <a href="#nav" class="skip-link">Pular para navegação</a>
+    <a href="#search" class="skip-link">Pular para busca</a>
+
     <header class="ifsp-header">
         <a href="https://www.ifsp.edu.br" target="_blank" rel="noopener noreferrer" title="Ir para o site do IFSP">
             <img src="assets/images/logo-ifsp.png" alt="Logo do IFSP" class="ifsp-logo-svg">
@@ -52,7 +57,7 @@
     </header>
 
     <!-- Navigation Menu -->
-    <nav class="policy-nav" role="navigation" aria-label="Navegação principal">
+    <nav class="policy-nav" role="navigation" aria-label="Navegação principal" id="nav">
         <div class="nav-container">
             <a href="index.html" class="nav-home-link" aria-label="Página inicial">
                 <span class="nav-icon">🏠</span>
@@ -83,17 +88,19 @@
                 </div>
             </div>
         </div>
-    </nav>    <main>
+    </nav>    <main id="main">
         <!-- Global Search Section -->
-        <section class="search-card" role="search" aria-labelledby="global-search-title">
+        <section class="search-card" role="search" aria-labelledby="global-search-title" id="search">
             <div class="search-card-content">
                 <h2 id="global-search-title" class="search-title">Buscar em todas as políticas</h2>
-                <input type="search" 
-                       id="globalSearchInput" 
-                       placeholder="Busque por palavras-chave em todas as políticas..." 
-                       autocomplete="off"
-                       aria-label="Buscar em todas as políticas"
-                       role="searchbox">
+                <div class="search-input-container">
+                    <input type="search" 
+                           id="globalSearchInput" 
+                           placeholder="Busque por palavras-chave em todas as políticas..." 
+                           autocomplete="off"
+                           aria-label="Buscar em todas as políticas"
+                           role="searchbox">
+                </div>
                 <div id="globalSearchResults" class="search-results" style="display: none;">
                     <div id="searchResultsList" class="results-list"></div>
                     <p id="globalNoResultsMessage" class="no-results-message" style="display: none;">Nenhum resultado encontrado.</p>

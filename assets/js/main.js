@@ -1,6 +1,233 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Footer is now embedded directly in HTML during build process
-    // No dynamic loading needed
+    // Skip link functionality
+    const skipLink = document.querySelector('.skip-link');
+    if (skipLink) {
+        skipLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.focus();
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    }
+
+    // Footer year update
+    const currentYearSpan = document.getElementById('current-year');
+    if (currentYearSpan) {
+        currentYearSpan.textContent = new Date().getFullYear();
+    }
+
+    // Virtual Keyboard functionality
+    class VirtualKeyboard {
+        constructor() {
+            this.activeInput = null;
+            this.keyboard = null;
+            this.isVisible = false;
+            this.init();
+        }
+
+        init() {
+            this.createKeyboard();
+            this.attachEventListeners();
+        }
+
+        createKeyboard() {
+            const keyboardHTML = `
+                <div class="virtual-keyboard" id="virtualKeyboard" role="dialog" aria-label="Teclado virtual" aria-modal="true">
+                    <div class="keyboard-row">
+                        <button class="keyboard-key" data-key="q">Q</button>
+                        <button class="keyboard-key" data-key="w">W</button>
+                        <button class="keyboard-key" data-key="e">E</button>
+                        <button class="keyboard-key" data-key="r">R</button>
+                        <button class="keyboard-key" data-key="t">T</button>
+                        <button class="keyboard-key" data-key="y">Y</button>
+                        <button class="keyboard-key" data-key="u">U</button>
+                        <button class="keyboard-key" data-key="i">I</button>
+                        <button class="keyboard-key" data-key="o">O</button>
+                        <button class="keyboard-key" data-key="p">P</button>
+                    </div>
+                    <div class="keyboard-row">
+                        <button class="keyboard-key" data-key="a">A</button>
+                        <button class="keyboard-key" data-key="s">S</button>
+                        <button class="keyboard-key" data-key="d">D</button>
+                        <button class="keyboard-key" data-key="f">F</button>
+                        <button class="keyboard-key" data-key="g">G</button>
+                        <button class="keyboard-key" data-key="h">H</button>
+                        <button class="keyboard-key" data-key="j">J</button>
+                        <button class="keyboard-key" data-key="k">K</button>
+                        <button class="keyboard-key" data-key="l">L</button>
+                    </div>
+                    <div class="keyboard-row">
+                        <button class="keyboard-key special" data-key="shift">⇧</button>
+                        <button class="keyboard-key" data-key="z">Z</button>
+                        <button class="keyboard-key" data-key="x">X</button>
+                        <button class="keyboard-key" data-key="c">C</button>
+                        <button class="keyboard-key" data-key="v">V</button>
+                        <button class="keyboard-key" data-key="b">B</button>
+                        <button class="keyboard-key" data-key="n">N</button>
+                        <button class="keyboard-key" data-key="m">M</button>
+                        <button class="keyboard-key special backspace" data-key="backspace">⌫</button>
+                    </div>
+                    <div class="keyboard-row">
+                        <button class="keyboard-key special" data-key="numbers">123</button>
+                        <button class="keyboard-key space" data-key=" ">Espaço</button>
+                        <button class="keyboard-key enter" data-key="enter">↵</button>
+                    </div>
+                </div>
+            `;
+
+            document.body.insertAdjacentHTML('beforeend', keyboardHTML);
+            this.keyboard = document.getElementById('virtualKeyboard');
+            this.attachKeyboardEvents();
+        }
+
+        attachEventListeners() {
+            // Find all search inputs
+            const searchInputs = document.querySelectorAll('input[type="search"]');
+
+            searchInputs.forEach(input => {
+                // Add toggle button
+                const container = input.parentElement;
+                const toggleBtn = document.createElement('button');
+                toggleBtn.type = 'button';
+                toggleBtn.className = 'virtual-keyboard-toggle';
+                toggleBtn.innerHTML = '⌨️';
+                toggleBtn.setAttribute('aria-label', 'Mostrar teclado virtual');
+                toggleBtn.setAttribute('title', 'Teclado virtual');
+
+                container.style.position = 'relative';
+                container.appendChild(toggleBtn);
+
+                // Toggle keyboard on button click
+                toggleBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.toggleKeyboard(input);
+                });
+
+                // Show keyboard on input focus (for accessibility)
+                input.addEventListener('focus', () => {
+                    if (this.isVisible && this.activeInput === input) {
+                        return; // Already showing for this input
+                    }
+                    this.showKeyboard(input);
+                });
+
+                // Hide keyboard when input loses focus (but keep it if clicking on keyboard)
+                input.addEventListener('blur', (e) => {
+                    // Delay to allow keyboard clicks
+                    setTimeout(() => {
+                        if (!this.keyboard.contains(document.activeElement)) {
+                            this.hideKeyboard();
+                        }
+                    }, 100);
+                });
+            });
+        }
+
+        attachKeyboardEvents() {
+            this.keyboard.addEventListener('click', (e) => {
+                if (e.target.classList.contains('keyboard-key')) {
+                    e.preventDefault();
+                    const key = e.target.dataset.key;
+                    this.handleKeyPress(key);
+                }
+            });
+
+            // Keyboard navigation
+            this.keyboard.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    this.hideKeyboard();
+                    if (this.activeInput) {
+                        this.activeInput.focus();
+                    }
+                }
+            });
+        }
+
+        handleKeyPress(key) {
+            if (!this.activeInput) return;
+
+            const input = this.activeInput;
+            const start = input.selectionStart;
+            const end = input.selectionEnd;
+            const value = input.value;
+
+            switch (key) {
+                case 'backspace':
+                    if (start === end) {
+                        input.value = value.slice(0, start - 1) + value.slice(end);
+                        input.selectionStart = input.selectionEnd = start - 1;
+                    } else {
+                        input.value = value.slice(0, start) + value.slice(end);
+                        input.selectionStart = input.selectionEnd = start;
+                    }
+                    break;
+                case 'enter':
+                    input.value = value.slice(0, start) + '\n' + value.slice(end);
+                    input.selectionStart = input.selectionEnd = start + 1;
+                    break;
+                case 'shift':
+                    // Toggle case for next key press (simplified)
+                    break;
+                case 'numbers':
+                    // Toggle to number/symbol keyboard (simplified)
+                    break;
+                default:
+                    input.value = value.slice(0, start) + key + value.slice(end);
+                    input.selectionStart = input.selectionEnd = start + key.length;
+                    break;
+            }
+
+            // Trigger input event for search functionality
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+
+            // Keep focus on input
+            input.focus();
+        }
+
+        toggleKeyboard(input) {
+            if (this.isVisible && this.activeInput === input) {
+                this.hideKeyboard();
+            } else {
+                this.showKeyboard(input);
+            }
+        }
+
+        showKeyboard(input) {
+            this.activeInput = input;
+            this.keyboard.classList.add('show');
+            this.isVisible = true;
+
+            // Position keyboard near the input
+            const inputRect = input.getBoundingClientRect();
+            const keyboardRect = this.keyboard.getBoundingClientRect();
+
+            // Position above input if there's space, otherwise below
+            if (inputRect.top > keyboardRect.height + 20) {
+                this.keyboard.style.bottom = 'auto';
+                this.keyboard.style.top = `${inputRect.top - keyboardRect.height - 10}px`;
+            } else {
+                this.keyboard.style.top = 'auto';
+                this.keyboard.style.bottom = `${window.innerHeight - inputRect.bottom - 10}px`;
+            }
+
+            this.keyboard.style.left = `${Math.max(10, Math.min(window.innerWidth - keyboardRect.width - 10, inputRect.left))}px`;
+
+            // Announce to screen readers
+            this.keyboard.setAttribute('aria-hidden', 'false');
+        }
+
+        hideKeyboard() {
+            this.keyboard.classList.remove('show');
+            this.isVisible = false;
+            this.activeInput = null;
+            this.keyboard.setAttribute('aria-hidden', 'true');
+        }
+    }
+
+    // Initialize virtual keyboard
+    new VirtualKeyboard();
 
     // Navigation dropdown functionality
     const dropdownBtn = document.querySelector('.nav-dropdown-btn');
