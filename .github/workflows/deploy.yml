@@ -1,0 +1,39 @@
+# Nome do fluxo de trabalho que aparecerá na aba "Actions"
+name: Deploy to GitHub Pages
+
+# Gatilho: este fluxo de trabalho roda toda vez que houver um push na branch 'main'
+on:
+  push:
+    branches:
+      - main
+
+# Permissões necessárias para que o Actions possa publicar no Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Define um único job (tarefa) chamado 'deploy'
+jobs:
+  deploy:
+    runs-on: ubuntu-latest # Rodará em uma máquina virtual Linux
+    steps:
+      # 1. Baixa o código do seu repositório
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Prepara o ambiente para o GitHub Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # 3. Faz o upload dos arquivos do site como um "artefato"
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Faz o upload do diretório raiz (onde estão seu index.html e assets)
+          path: '.'
+
+      # 4. Publica o artefato no GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
