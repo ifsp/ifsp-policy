@@ -1,59 +1,60 @@
-# Nome do fluxo de trabalho que aparecerá na aba "Actions"
+# Nome do fluxo de trabalho
 name: Deploy to GitHub Pages
 
-# Gatilho: este fluxo de trabalho roda toda vez que houver um push na branch 'main'
+# Gatilho
 on:
   push:
     branches:
       - main
 
-# Permissões necessárias para que o Actions possa publicar no Pages
+# Permissões
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Define um único job (tarefa) chamado 'deploy'
 jobs:
   deploy:
-    # Declaração do ambiente de deploy, agora obrigatória pelo GitHub
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     
-    # Rodará em uma máquina virtual Linux
     runs-on: ubuntu-latest
     
-    # Passos que o job executará em sequência
     steps:
-      # 1. Baixa o código do seu repositório para a máquina virtual
+      # 1. Baixa o código do seu repositório
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Pega a data do último commit e a injeta no HTML
-      - name: Inject last commit date
+      # --- INÍCIO DA MUDANÇA ---
+      # 2. Etapa para obter e formatar a data, e expô-la como uma "saída" (output)
+      - name: Get last commit date
+        id: get_date # Damos um ID a esta etapa para referenciar sua saída
         run: |
-          # Pega a data do último commit, ajustada para o fuso horário de São Paulo (UTC-3)
           COMMIT_DATE=$(TZ="America/Sao_Paulo" git log -1 --format=%cI)
-          
-          # Formata a data para o padrão dd/mm/yyyy
           FORMATTED_DATE=$(date -d "$COMMIT_DATE" +'%d/%m/%Y')
-          
-          # Encontra e substitui o placeholder __LAST_UPDATED__ no arquivo index.html
-          sed -i "s|__LAST_UPDATED__|${FORMATTED_DATE}|g" index.html
+          echo "formatted_date=$FORMATTED_DATE" >> "$GITHUB_OUTPUT"
+
+      # 3. Usa uma Ação dedicada para encontrar e substituir o texto de forma segura
+      - name: Replace placeholder with date
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: "__LAST_UPDATED__"
+          replace: "${{ steps.get_date.outputs.formatted_date }}" # Pega a saída da etapa anterior
+          include: "index.html"
+      # --- FIM DA MUDANÇA ---
       
-      # 3. Prepara o ambiente para o GitHub Pages
+      # 4. Prepara o ambiente para o GitHub Pages
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      # 4. Faz o upload dos arquivos do site (com a data já injetada) como um "artefato"
+      # 5. Faz o upload do artefato (com o texto já substituído)
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Faz o upload do diretório raiz
           path: '.'
 
-      # 5. Publica o artefato no GitHub Pages
+      # 6. Publica no GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
