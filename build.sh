@@ -22,13 +22,24 @@ sed "s|__LAST_UPDATED__|${FORMATTED_DATE_REPO}|g" includes/footer.html > temp_fo
 
 # Substitui o footer placeholder pelo conteúdo processado
 cp index.html dist/index.html
-sed -i '/<footer id="footer-placeholder">/,/<\/footer>/{
-    /<footer id="footer-placeholder">/{
-        r temp_footer.html
-        d
-    }
-    /<\/footer>/d
-}' dist/index.html
+awk '
+BEGIN { in_footer = 0; printed_content = 0 }
+/<footer id="footer-placeholder">/ { 
+    in_footer = 1; 
+    print "<footer id=\"footer-placeholder\">"; 
+    system("cat temp_footer.html"); 
+    printed_content = 1; 
+    next 
+}
+/<\/footer>/ { 
+    if (in_footer && printed_content) { 
+        print "</footer>"; 
+        in_footer = 0; 
+        next 
+    } 
+}
+!in_footer { print }
+' dist/index.html > dist/index_temp.html && mv dist/index_temp.html dist/index.html
 
 # 4. Processa CADA política individualmente
 echo "    - Processando páginas de políticas..."
@@ -43,20 +54,24 @@ for file in policies/*.html; do
     
     # Copia o arquivo e substitui o footer placeholder
     cp "$file" "dist/$file"
-    sed -i '/<footer id="footer-placeholder">/,/<\/footer>/{
-        /<footer id="footer-placeholder">/{
-            r temp_footer.html
-            d
-        }
-        /<\/footer>/d
-    }' "dist/$file"
-    sed -i '/<footer id="footer-placeholder" role="contentinfo" aria-label="Informações institucionais e direitos autorais">/,/<\/footer>/{
-        /<footer id="footer-placeholder" role="contentinfo" aria-label="Informações institucionais e direitos autorais">/{
-            r temp_footer.html
-            d
-        }
-        /<\/footer>/d
-    }' "dist/$file"
+    awk '
+    BEGIN { in_footer = 0; printed_content = 0 }
+    /<footer id="footer-placeholder">/ || /<footer id="footer-placeholder" role="contentinfo" aria-label="Informações institucionais e direitos autorais">/ { 
+        in_footer = 1; 
+        print gensub(/(<footer[^>]*>).*/, "\\1", "g"); 
+        system("cat temp_footer.html"); 
+        printed_content = 1; 
+        next 
+    }
+    /<\/footer>/ { 
+        if (in_footer && printed_content) { 
+            print "</footer>"; 
+            in_footer = 0; 
+            next 
+        } 
+    }
+    !in_footer { print }
+    ' "dist/$file" > "dist/${file}_temp" && mv "dist/${file}_temp" "dist/$file"
 done
 
 # Limpa o arquivo temporário
