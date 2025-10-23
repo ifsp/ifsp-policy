@@ -472,12 +472,58 @@ details[open] summary::after {
 }
 
 /* === FOOTER === */
+footer {
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+    border-top: 2px solid var(--ifsp-verde);
+    margin-top: 3rem;
+}
+
 .footer-container {
-    padding: 2rem 1.5rem;
-    color: #52525b;
-    font-size: 0.9rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem 2rem;
+    color: #374151;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    text-align: center;
+}
+
+.footer-container strong {
+    color: var(--ifsp-verde-escuro);
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.copyright-line {
+    margin: 0.75rem 0;
+    color: #6b7280;
+}
+
+.copyright-line a {
+    color: var(--ifsp-verde);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.copyright-line a:hover {
+    color: var(--ifsp-verde-escuro);
+    text-decoration: underline;
+}
+
+.ai-declaration {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+    color: #9ca3af;
+    font-size: 0.85rem;
+    font-style: italic;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
     line-height: 1.6;
-    text-align: center; /* Adicione esta linha para garantir a centralização */
 }
 
 /* === TABLE OF CONTENTS === */
