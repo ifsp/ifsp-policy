@@ -6,7 +6,6 @@ echo "    - Limpando o diretório 'dist'..."
 rm -rf dist
 mkdir -p dist/assets
 mkdir -p dist/policies
-mkdir -p dist/_includes
 
 # 2. Copia os assets
 echo "    - Copiando arquivos estáticos..."
