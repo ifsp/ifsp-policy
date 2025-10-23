@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>- IFSP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="antialiased">
+
+    <header class="ifsp-header">
+        <a href="https://www.ifsp.edu.br" target="_blank" rel="noopener noreferrer" title="Ir para o site do IFSP">
+             <img src="../assets/images/logo-ifsp.png" alt="Logo do IFSP" class="ifsp-logo-svg">
+        </a>
+        <h1 class="text-2xl sm:text-3xl font-bold mb-2"></h1>
+        <p class="text-lg opacity-90">Tudo o que você precisa saber (Perguntas Frequentes)</p>
+    </header>
+
+    <main>
+        <div class="mb-8">
+            <label for="searchInput" class="block text-lg font-semibold text-gray-800 mb-3">Tem alguma dúvida?</label>
+            <input type="search" id="searchInput" placeholder="Busque por..." autocomplete="off">
+            <p id="noResultsMessage" class="text-center text-gray-500 mt-6" style="display: none;">Nenhum resultado encontrado.</p>
+        </div>
+
+        <div id="faqContainer">
+            <h2 class="text-2xl font-bold">Categoria 1</h2>
+            <details class="faq-item">
+                <summary>Pergunta 1</summary>
+                <div class="faq-content">
+                    <p>Resposta 1.</p>
+                </div>
+            </details>
+        </div>
+        </main>
+
+    <footer class="text-center p-6 mt-10 border-t border-gray-200">
+        </footer>
+    
+    <script src="../assets/js/script.js"></script>
+</body>
+</html>
