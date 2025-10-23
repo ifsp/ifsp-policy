@@ -19,11 +19,16 @@
         <p class="text-lg opacity-90">Tudo o que você precisa saber (Perguntas Frequentes)</p>
     </header>
 
-    <main>
-        <div class="mb-8">
+    <main class="max-w-4xl mx-auto p-4 sm:p-8" role="main">
+        <div class="mb-8" role="search">
             <label for="searchInput" class="block text-lg font-semibold text-gray-800 mb-3">Tem alguma dúvida?</label>
-            <input type="search" id="searchInput" placeholder="Busque por 'ChatGPT', 'dados pessoais', 'plágio'..." autocomplete="off">
-            <p id="noResultsMessage" class="text-center text-gray-500 mt-6" style="display: none;">Nenhum resultado encontrado.</p>
+            <input type="search" 
+                   id="searchInput" 
+                   placeholder="Busque por 'ChatGPT', 'dados pessoais', 'plágio'..." 
+                   autocomplete="off"
+                   aria-label="Buscar nas perguntas frequentes"
+                   role="searchbox">
+            <p id="noResultsMessage" class="text-center text-gray-500 mt-6" style="display: none;" role="alert" aria-live="polite">Nenhum resultado encontrado.</p>
         </div>
 
         <div id="faqContainer">
@@ -33,14 +38,14 @@
             <details class="faq-item">
                 <summary>Para quem vale esta Política?</summary>
                 <div class="faq-content">
-                    <p>A política vale para <strong>TODA a comunidade do IFSP</strong>. Isso inclui servidores (docentes e TAEs), estudantes, pesquisadores, estagiários, colaboradores e até funcionários de empresas prestadoras de serviço que usam os recursos de TI da instituição.</p>
+                    [cite_start]<p>A política vale para <strong>TODA a comunidade do IFSP</strong>[cite: 31]. [cite_start]Isso inclui servidores (docentes e TAEs), estudantes, pesquisadores, estagiários, colaboradores e até funcionários de empresas prestadoras de serviço que usam os recursos de TI da instituição[cite: 31].</p>
                 </div>
             </details>
 
             <details class="faq-item">
                 <summary>Se a IA gerar uma informação errada ou com "alucinação", a culpa é dela?</summary>
                 <div class="faq-content">
-                    <p><strong>NÃO.</strong> A responsabilidade por qualquer conteúdo gerado por IA é <strong>integralmente sua</strong>, o usuário. O Art. 6º é claro: você deve verificar a precisão, adequação e ausência de vieses do conteúdo antes de usá-lo. A ocorrência de erros ou "alucinações" não te isenta da responsabilidade pelo produto final.</p>
+                    [cite_start]<p><strong>NÃO.</strong> A responsabilidade por qualquer conteúdo gerado por IA é <strong>integralmente sua</strong>, o usuário[cite: 80]. O Art. [cite_start]6º é claro: você deve verificar a precisão, adequação e ausência de vieses do conteúdo antes de usá-lo[cite: 80]. [cite_start]A ocorrência de erros ou "alucinações" não te isenta da responsabilidade pelo produto final[cite: 81].</p>
                 </div>
             </details>
 
@@ -49,20 +54,20 @@
             <details class="faq-item">
                 <summary>Posso colocar dados de alunos ou documentos do IFSP no ChatGPT (ou outra IA externa)?</summary>
                 <div class="faq-content">
-                    <p><strong>NÃO, em hipótese alguma.</strong> O Art. 8º <strong>PROÍBE EXPRESSAMENTE</strong> que você insira em IAs de Uso Particular (ferramentas não contratadas pelo IFSP):</p>
-                    <ul class="list-disc list-inside ml-4 space-y-2">
-                        <li><strong>Dados Pessoais Sensíveis</strong> de qualquer pessoa.</li>
-                        <li><strong>Dados Pessoais não anonimizados</strong> (exceto os seus próprios, se você estiver ciente dos riscos).</li>
-                        <li><strong>Dados Institucionais Confidenciais</strong> (como dados de pesquisa não publicados, avaliações, questões de provas, etc.).</li>
+                    <p><strong>NÃO, em hipótese alguma.</strong> O Art. [cite_start]8º <strong>PROÍBE EXPRESSAMENTE</strong> que você insira em IAs de Uso Particular (ferramentas não contratadas pelo IFSP)[cite: 92]:</p>
+                    <ul class="list-disc list-inside ml-4 space-y-2" role="list" aria-label="Proibições de uso de IA">
+                        [cite_start]<li><strong>Dados Pessoais Sensíveis</strong> de qualquer pessoa[cite: 93].</li>
+                        [cite_start]<li><strong>Dados Pessoais não anonimizados</strong> (exceto os seus próprios, se você estiver ciente dos riscos)[cite: 94].</li>
+                        [cite_start]<li><strong>Dados Institucionais Confidenciais</strong> (como dados de pesquisa não publicados, avaliações, questões de provas, etc.)[cite: 95].</li>
                     </ul>
-                    <p>A regra é: apenas dados públicos ou que foram devidamente anonimizados podem ser usados nessas ferramentas.</p>
+                    [cite_start]<p>A regra é: apenas dados públicos ou que foram devidamente anonimizados podem ser usados nessas ferramentas[cite: 99].</p>
                 </div>
             </details>
 
             <details class="faq-item">
                 <summary>Sou obrigado(a) a informar que usei IA para fazer um documento ou trabalho?</summary>
                 <div class="faq-content">
-                    <p><strong>SIM.</strong> A transparência é um princípio fundamental da política. O Art. 7º determina que, sempre que uma IA for usada de forma significativa, seu uso <strong>deve ser claramente indicado</strong>. Você precisa especificar qual ferramenta usou (ex: Gemini, ChatGPT), para quê (ex: revisão de texto, brainstorming) e a extensão do uso (parcial, total, etc).</p>
+                    [cite_start]<p><strong>SIM.</strong> A transparência é um princípio fundamental da política[cite: 62, 84]. O Art. [cite_start]7º determina que, sempre que uma IA for usada de forma significativa, seu uso <strong>deve ser claramente indicado</strong>[cite: 84]. [cite_start]Você precisa especificar qual ferramenta usou (ex: Gemini, ChatGPT), para quê (ex: revisão de texto, brainstorming) e a extensão do uso (parcial, total, etc)[cite: 87, 88, 89].</p>
                 </div>
             </details>
 
@@ -71,12 +76,45 @@
             <details class="faq-item">
                 <summary>Posso usar IA para fazer meus trabalhos acadêmicos?</summary>
                 <div class="faq-content">
-                    <p><strong>SIM, como uma ferramenta de apoio.</strong> O Art. 13º permite o uso de IA para tarefas como buscar informações, corrigir textos, gerar ideias ou estruturar trabalhos.</p>
-                    <p>No entanto, é <strong>proibido</strong> apresentar um trabalho gerado substancialmente por IA como se fosse de sua autoria. Isso é considerado uma violação da integridade acadêmica e está sujeito a punições. A IA não deve substituir seu pensamento crítico e sua análise original.</p>
+                    <p><strong>SIM, como uma ferramenta de apoio.</strong> O Art. [cite_start]13º permite o uso de IA para tarefas como buscar informações, corrigir textos, gerar ideias ou estruturar trabalhos[cite: 117].</p>
+                    <p>No entanto, é <strong>proibido</strong> apresentar um trabalho gerado substancialmente por IA como se fosse de sua autoria. [cite_start]Isso é considerado uma violação da integridade acadêmica e está sujeito a punições[cite: 116]. [cite_start]A IA não deve substituir seu pensamento crítico e sua análise original[cite: 117].</p>
                 </div>
             </details>
 
             <details class="faq-item">
                 <summary>Um professor pode me proibir de usar IA em uma atividade?</summary>
                 <div class="faq-content">
-                    <p><strong>SIM.</strong> Para garantir que os objetivos de aprendizagem sejam atingidos, os docentes podem estabelecer limites ou restrições específicas sobre
+                    [cite_start]<p><strong>SIM.</strong> Para garantir que os objetivos de aprendizagem sejam atingidos, os docentes podem estabelecer limites ou restrições específicas sobre o uso de IA em certas atividades avaliativas[cite: 121]. [cite_start]O objetivo é assegurar que você desenvolva as competências esperadas para a disciplina[cite: 121].</p>
+                </div>
+            </details>
+
+            <h2 class="text-2xl font-bold">Penalidades</h2>
+
+             <details class="faq-item">
+                <summary>O que acontece se eu não seguir essas regras?</summary>
+                <div class="faq-content">
+                    [cite_start]<p>O descumprimento da política sujeita o infrator às sanções administrativas, disciplinares, cíveis e penais previstas na lei e nos regimentos do IFSP[cite: 174].</p>
+                </div>
+            </details>
+
+        </div>
+
+        <div class="mt-12 button-container">
+            <p class="text-lg text-gray-700 mb-4">Este é apenas um resumo. Para detalhes, exceções e todas as regras, é fundamental ler o documento completo.</p>
+            <a href="https://ifsp.edu.br/images/2025/07-julho/PORT_RET_136_Politica_de_Uso_IAs.pdf"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="btn-primary text-lg"
+               aria-label="Acessar a versão completa da Política em PDF (abre em nova janela)">
+                Acessar a Política Completa (PDF)
+            </a>
+        </div>
+    </main>
+
+    <footer id="footer-placeholder">
+    </footer>
+    
+    <script src="/assets/js/main.js"></script> 
+    <script src="/assets/js/script.js"></script>
+</body>
+</html>
