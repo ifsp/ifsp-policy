@@ -1,129 +1,180 @@
+/* === GERAL E LAYOUT === */
 body {
     font-family: 'Inter', sans-serif;
     background-color: #f4f4f5; /* zinc-100 */
-    }
+}
 
-/* Cores da Identidade Visual do IFSP */
-    :root {
-        --ifsp-verde: #008040;
-        --ifsp-verde-escuro: #004020;
-        --ifsp-cinza: #333333;
-    }
+main {
+    max-width: 896px; /* Controla a largura máxima para melhor leitura */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3rem 1.5rem; /* Adiciona respiro vertical e padding lateral */
+}
 
-    /* Estilo para o cabeçalho padrão reutilizável */
-    .ifsp-header {
-        background: linear-gradient(135deg, var(--ifsp-verde), var(--ifsp-verde-escuro));
-        color: white;
-        padding: 2.5rem 1.5rem;
-        border-bottom-left-radius: 2rem;
-        border-bottom-right-radius: 2rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        text-align: center;
-        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    }
+/* === HEADER === */
+.ifsp-header {
+    background: linear-gradient(135deg, var(--ifsp-verde), var(--ifsp-verde-escuro));
+    color: white;
+    padding: 2.5rem 1.5rem;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
 
-    .ifsp-logo-svg {
-        width: 80px;
-        height: 80px;
-        margin-bottom: 1rem;
-    }
+.ifsp-logo-svg {
+    width: 100px; /* Um pouco maior para melhor proporção */
+    height: auto; /* Deixa a altura se ajustar para não distorcer */
+    margin-bottom: 1.5rem; /* Aumenta o espaço abaixo */
+    transition: transform 0.2s ease-in-out; /* Adiciona uma transição suave */
+}
 
-    /* Estilo para os cards do FAQ (Accordion) */
-    details {
-        background-color: white;
-        border-radius: 0.75rem; /* rounded-xl */
-        box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); /* shadow-md */
-        margin-bottom: 1rem;
-        transition: all 0.2s ease-in-out;
-    }
+/* Adicione esta nova regra para um efeito ao passar o mouse */
+.ifsp-header a:hover .ifsp-logo-svg {
+    transform: scale(1.05); /* Aumenta levemente o logo, dando feedback visual */
+}
 
-    details:hover {
-        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-lg */
-        }
+/* === TÍTULOS DE CATEGORIA (H2) === */
+main h2 {
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #e4e4e7;
+    color: var(--ifsp-verde-escuro);
+}
 
-    details[open] {
-        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-lg */
-    }
+main h2:first-of-type {
+    margin-top: 2rem;
+}
 
-    summary {
-        padding: 1.25rem 1.5rem;
-        font-weight: 600; /* semibold */
-        color: var(--ifsp-cinza);
-        cursor: pointer;
-        list-style: none;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+/* === FAQ ACCORDION === */
+details {
+    background-color: white;
+    border-radius: 0.75rem;
+    border: 1px solid #e4e4e7; /* Adiciona uma borda sutil */
+    box-shadow: none; /* Remove a sombra antiga para um look mais clean */
+    margin-bottom: 1rem;
+    transition: all 0.2s ease-in-out;
+}
 
-    summary::-webkit-details-marker {
-        display: none;
-    }
+details:hover {
+    border-color: var(--ifsp-verde); /* Destaca ao passar o mouse */
+}
 
-    /* Seta do accordion */
-    summary::after {
-        content: '+';
-        font-size: 1.5rem;
-        font-weight: 400;
-        color: var(--ifsp-verde);
-        transition: transform 0.2s ease-in-out;
-    }
+details[open] {
+    border-color: var(--ifsp-verde);
+}
 
-    details[open] summary::after {
-        content: '−';
-    }
+summary {
+    padding: 1.5rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--ifsp-cinza);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s ease-in-out;
+}
 
+summary:hover {
+    background-color: #f9fafb; /* Cinza bem claro para feedback */
+}
 
-    .faq-content {
-        padding: 0 1.5rem 1.25rem 1.5rem;
-        color: #3f3f46; /* zinc-700 */
-        line-height: 1.6;
-    }
+summary::-webkit-details-marker {
+    display: none;
+}
 
-    .faq-content p {
-        margin-bottom: 0.75rem;
-    }
+summary::after {
+    content: '+';
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--ifsp-verde);
+    transition: transform 0.3s ease-in-out;
+    transform: rotate(0deg);
+}
 
-    /* Estilo para o highlight da busca */
-    .highlight {
-        background-color: #fef08a; /* yellow-200 */
-        padding: 0 2px;
-        border-radius: 3px;
-        font-weight: 600;
-        color: #713f12; /* yellow-900 */
-    }
+details[open] summary::after {
+    content: '+';
+    transform: rotate(45deg);
+}
 
-    /* Botão principal */
-    .btn-primary {
-        background-color: var(--ifsp-verde);
-        color: white;
-        font-weight: 600;
-        padding: 0.75rem 1.5rem;
-        border-radius: 0.5rem; /* rounded-lg */
-        text-align: center;
-        display: inline-block;
-        transition: background-color 0.2s ease;
-    }
+.faq-content {
+    padding: 0.25rem 1.5rem 1.25rem 1.5rem;
+    color: #333;
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.7; /* Mais espaçado */
+}
 
-    .btn-primary:hover {
-        background-color: var(--ifsp-verde-escuro);
-    }
+.faq-content p {
+    margin-bottom: 1rem;
+}
 
-    /* Input de busca */
-    #searchInput {
-        border: 2px solid #e4e4e7; /* zinc-200 */
-        border-radius: 0.5rem; /* rounded-lg */
-        padding: 0.75rem 1.25rem;
-        width: 100%;
-        font-size: 1rem;
-        transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    }
+/* === BUSCA E OUTROS ELEMENTOS === */
+#searchInput {
+    border: 2px solid #e4e4e7;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    width: 100%;
+    font-size: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
 
-    #searchInput:focus {
-        outline: none;
-        border-color: var(--ifsp-verde);
-        box-shadow: 0 0 0 3px rgba(0, 128, 64, 0.2);
+#searchInput:focus {
+    outline: none;
+    border-color: var(--ifsp-verde);
+    box-shadow: 0 0 0 3px rgba(0, 128, 64, 0.2);
+}
+
+.highlight {
+    background-color: #fef08a;
+    padding: 0 2px;
+    border-radius: 3px;
+    font-weight: 600;
+    color: #713f12;
+}
+
+.btn-primary {
+    background-color: var(--ifsp-verde);
+    color: white;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    display: inline-block;
+    transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--ifsp-verde-escuro);
+}
+
+/* === CORES GLOBAIS === */
+:root {
+    --ifsp-verde: #008040;
+    --ifsp-verde-escuro: #004020;
+    --ifsp-cinza: #333333;
+}
+
+/* Adicione esta regra para centralizar o botão de forma robusta */
+.button-container {
+    /* Usando Flexbox para alinhamento */
+    display: flex;
+    flex-direction: column; /* Organiza os itens em uma coluna (o parágrafo em cima, o botão embaixo) */
+    align-items: center;   /* Centraliza horizontalmente os itens da coluna */
+    text-align: center;      /* Garante que o texto dentro do parágrafo também fique centralizado */
+}
+
+/* === FOOTER === */
+footer {
+    padding: 2rem 1.5rem;
+    color: #52525b;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    text-align: center; /* Adicione esta linha para garantir a centralização */
 }
