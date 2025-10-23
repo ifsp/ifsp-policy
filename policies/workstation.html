@@ -54,12 +54,15 @@
         <div id="faqContainer" role="region" aria-label="Perguntas Frequentes">
 
             <nav class="faq-navigation" aria-label="Navegação das seções de FAQ">
-                <ul role="list" class="list-none p-0 m-0">
-                    <li><a href="#section-geral" class="text-[var(--ifsp-verde-escuro)]">Geral e Responsabilidades</a></li>
-                    <li><a href="#section-seguranca" class="text-[var(--ifsp-verde-escuro)]">Segurança no Dia a Dia</a></li>
-                    <li><a href="#section-software" class="text-[var(--ifsp-verde-escuro)]">Softwares e Dados</a></li>
-                    <li><a href="#section-proibicoes" class="text-[var(--ifsp-verde-escuro)]">Proibições e Penalidades</a></li>
-                </ul>
+                <div class="toc-card">
+                    <h3 class="toc-title">Índice das Seções</h3>
+                    <ul role="list" class="toc-list">
+                        <li><a href="#section-geral" class="toc-link">Geral e Responsabilidades</a></li>
+                        <li><a href="#section-seguranca" class="toc-link">Segurança no Dia a Dia</a></li>
+                        <li><a href="#section-software" class="toc-link">Softwares e Dados</a></li>
+                        <li><a href="#section-proibicoes" class="toc-link">Proibições e Penalidades</a></li>
+                    </ul>
+                </div>
             </nav>
 
             <section aria-labelledby="section-geral">
@@ -102,7 +105,7 @@
                 </div>
             </details>
 
-            <h2 class="text-2xl font-bold text-[var(--ifsp-verde-escuro)] mt-8 mb-4">Segurança no Dia a Dia</h2>
+            <h2 class="text-2xl font-bold text-[var(--ifsp-verde-escuro)] mt-8 mb-4" id="section-seguranca">Segurança no Dia a Dia</h2>
 
             <details class="faq-item">
                 <summary>Achei um pen drive "perdido" no corredor. Posso espetar no computador para ver o que é?</summary>
@@ -144,7 +147,7 @@
                 </div>
             </details>
 
-            <h2 class="text-2xl font-bold text-[var(--ifsp-verde-escuro)] mt-8 mb-4">Softwares, Dados e Dispositivos Pessoais (BYOD)</h2>
+            <h2 class="text-2xl font-bold text-[var(--ifsp-verde-escuro)] mt-8 mb-4" id="section-software">Softwares, Dados e Dispositivos Pessoais (BYOD)</h2>
 
             <details class="faq-item">
                 <summary>Posso instalar um programa (software) no meu computador do IFSP?</summary>
@@ -185,7 +188,7 @@
                 </div>
             </details>
 
-            <h2 class="text-2xl font-bold text-[var(--ifsp-verde-escuro)] mt-8 mb-4">Proibições e Penalidades</h2>
+            <h2 class="text-2xl font-bold text-[var(--ifsp-verde-escuro)] mt-8 mb-4" id="section-proibicoes">Proibições e Penalidades</h2>
 
             <details class="faq-item">
                 <summary>O que é terminantemente PROIBIDO fazer com os recursos de TI?</summary>

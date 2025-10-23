@@ -178,3 +178,80 @@ footer {
     line-height: 1.6;
     text-align: center; /* Adicione esta linha para garantir a centralização */
 }
+
+/* === TABLE OF CONTENTS === */
+.toc-card {
+    background-color: white;
+    border: 1px solid #e4e4e7;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    transition: all 0.2s ease-in-out;
+}
+
+.toc-card:hover {
+    border-color: var(--ifsp-verde);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.toc-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--ifsp-verde-escuro);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--ifsp-verde);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.toc-title::before {
+    content: "📋";
+    font-size: 1.25rem;
+}
+
+.toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.toc-link {
+    color: var(--ifsp-cinza);
+    text-decoration: none;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 500;
+    position: relative;
+}
+
+.toc-link::before {
+    content: "→";
+    color: var(--ifsp-verde);
+    font-weight: bold;
+    transition: transform 0.2s ease-in-out;
+}
+
+.toc-link:hover {
+    background-color: #f0f9f0;
+    color: var(--ifsp-verde-escuro);
+    transform: translateX(4px);
+}
+
+.toc-link:hover::before {
+    transform: translateX(2px);
+}
+
+.toc-link:focus {
+    outline: 2px solid var(--ifsp-verde);
+    outline-offset: 2px;
+}

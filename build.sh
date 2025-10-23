@@ -18,7 +18,7 @@ echo "    - Processando a página inicial..."
 # A página inicial usa a data do último commit do REPOSITÓRIO INTEIRO
 COMMIT_DATE_REPO=$(TZ="America/Sao_Paulo" git log -1 --format=%cI)
 FORMATTED_DATE_REPO=$(date -d "$COMMIT_DATE_REPO" +'%d/%m/%Y')
-sed "s|__LAST_UPDATED__|${FORMATTED_DATE_REPO}|g" index.html > dist/index.html
+sed "s|id=\"footer-placeholder\"|id=\"footer-placeholder\" data-last-updated=\"$FORMATTED_DATE_REPO\"|g" index.html > dist/index.html
 
 # 4. Processa CADA política individualmente
 echo "    - Processando páginas de políticas..."
@@ -29,7 +29,8 @@ for file in policies/*.html; do
     FORMATTED_DATE_FILE=$(date -d "$COMMIT_DATE_FILE" +'%d/%m/%Y')
     
     # Substitui o placeholder no arquivo e salva o resultado em dist/
-    sed "s|__LAST_UPDATED__|${FORMATTED_DATE_FILE}|g" "$file" > "dist/$file"
+    # Também adiciona um data attribute com a data para o JavaScript usar
+    sed "s|id=\"footer-placeholder\"|id=\"footer-placeholder\" data-last-updated=\"$FORMATTED_DATE_FILE\"|g" "$file" > "dist/$file"
 done
 
 echo "✅ Build concluído com sucesso!"

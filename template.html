@@ -27,7 +27,18 @@
         </div>
 
         <div id="faqContainer">
-            <h2 class="text-2xl font-bold">Categoria 1</h2>
+
+            <nav class="faq-navigation" aria-label="Navegação das seções de FAQ">
+                <div class="toc-card">
+                    <h3 class="toc-title">Índice das Seções</h3>
+                    <ul role="list" class="toc-list">
+                        <li><a href="#section-categoria1" class="toc-link">Categoria 1</a></li>
+                        <!-- Add more sections as needed -->
+                    </ul>
+                </div>
+            </nav>
+
+            <h2 id="section-categoria1" class="text-2xl font-bold">Categoria 1</h2>
             <details class="faq-item">
                 <summary>Pergunta 1</summary>
                 <div class="faq-content">
