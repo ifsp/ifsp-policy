@@ -22,13 +22,13 @@ sed "s|__LAST_UPDATED__|${FORMATTED_DATE_REPO}|g" includes/footer.html > temp_fo
 
 # Substitui o footer placeholder pelo conteúdo processado
 cp index.html dist/index.html
-sed -i '/<footer id="footer-placeholder">/,/<\/footer>/{
-    /<footer id="footer-placeholder">/{
+sed -i "/<footer id=\"footer-placeholder\">/,/<\/footer>/{
+    /<footer id=\"footer-placeholder\">/{
         r temp_footer.html
         d
     }
     /<\/footer>/d
-}' dist/index.html
+}" dist/index.html
 
 # 4. Processa CADA política individualmente
 echo "    - Processando páginas de políticas..."
@@ -43,19 +43,13 @@ for file in policies/*.html; do
 
     # Copia o arquivo e substitui o footer placeholder
     cp "$file" "dist/$file"
-    sed -i '/<footer id="footer-placeholder">/,/<\/footer>/{
-        /<footer id="footer-placeholder">/{
+    sed -i "/<footer id=\"footer-placeholder\">/,/<\/footer>/{
+        /<footer id=\"footer-placeholder\">/{
             r temp_footer.html
             d
         }
         /<\/footer>/d
-    }' "dist/$file"
-
-    # Handle the workstation.html case with additional attributes
-    if [[ "$file" == "policies/workstation.html" ]]; then
-        sed -i 's|<div class="footer-container|<footer role="contentinfo" aria-label="Informações institucionais e direitos autorais"><div class="footer-container|g' "dist/$file"
-        sed -i 's|</div>$|</div></footer>|g' "dist/$file"
-    fi
+    }" "dist/$file"
 done
 
 # Limpa o arquivo temporário
