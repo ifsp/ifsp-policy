@@ -82,16 +82,6 @@ main {
     transform: translateY(-1px);
 }
 
-.nav-current-page {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1rem;
-    color: var(--ifsp-verde-escuro);
-    font-weight: 600;
-    font-size: 0.9rem;
-}
-
 .nav-icon {
     font-size: 1.25rem;
 }
@@ -329,7 +319,7 @@ details[open] summary::after {
     font-size: 1.5rem;
 }
 
-#searchInput {
+#searchInput, #globalSearchInput {
     border: 3px solid rgba(255, 255, 255, 0.3);
     border-radius: 0.75rem;
     padding: 1rem 1.5rem;
@@ -341,12 +331,12 @@ details[open] summary::after {
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
 }
 
-#searchInput::placeholder {
+#searchInput::placeholder, #globalSearchInput::placeholder {
     color: #9ca3af;
     font-style: italic;
 }
 
-#searchInput:focus {
+#searchInput:focus, #globalSearchInput:focus {
     outline: none;
     border-color: rgba(255, 255, 255, 0.8);
     background-color: white;
@@ -386,6 +376,81 @@ details[open] summary::after {
 
 .btn-primary:hover {
     background-color: var(--ifsp-verde-escuro);
+}
+
+/* === GLOBAL SEARCH RESULTS === */
+.search-results {
+    margin-top: 1.5rem;
+}
+
+.results-list {
+    max-height: 400px;
+    overflow-y: auto;
+    border-radius: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.result-item {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.2s ease;
+}
+
+.result-item:last-child {
+    border-bottom: none;
+}
+
+.result-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.result-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.result-title::before {
+    content: "📄";
+    font-size: 1rem;
+}
+
+.result-link {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 0.25rem;
+    padding: 0.25rem 0;
+    border-radius: 0.25rem;
+    transition: all 0.2s ease;
+}
+
+.result-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.result-snippet {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.4;
+    margin-top: 0.5rem;
+}
+
+.no-results-message {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* === VISUAL SEPARATORS === */

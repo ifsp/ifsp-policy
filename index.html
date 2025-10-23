@@ -54,11 +54,11 @@
     <!-- Navigation Menu -->
     <nav class="policy-nav" role="navigation" aria-label="Navegação principal">
         <div class="nav-container">
-            <div class="nav-current-page">
+            <a href="index.html" class="nav-home-link" aria-label="Página inicial">
                 <span class="nav-icon">🏠</span>
                 <span class="nav-text">Página Inicial</span>
-            </div>
-
+            </a>
+            
             <div class="nav-dropdown">
                 <button class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true" aria-label="Ver todas as políticas">
                     <span class="nav-icon">📋</span>
@@ -83,9 +83,27 @@
                 </div>
             </div>
         </div>
-    </nav>
+    </nav>    <main>
+        <!-- Global Search Section -->
+        <section class="search-card" role="search" aria-labelledby="global-search-title">
+            <div class="search-card-content">
+                <h2 id="global-search-title" class="search-title">Buscar em todas as políticas</h2>
+                <input type="search" 
+                       id="globalSearchInput" 
+                       placeholder="Busque por palavras-chave em todas as políticas..." 
+                       autocomplete="off"
+                       aria-label="Buscar em todas as políticas"
+                       role="searchbox">
+                <div id="globalSearchResults" class="search-results" style="display: none;">
+                    <div id="searchResultsList" class="results-list"></div>
+                    <p id="globalNoResultsMessage" class="no-results-message" style="display: none;">Nenhum resultado encontrado.</p>
+                </div>
+            </div>
+        </section>
 
-    <main>
+        <!-- Visual Separator -->
+        <hr class="section-divider" aria-hidden="true">
+
         <h2 class="text-2xl font-bold">Políticas Publicadas</h2>
         
         <div class="policy-card-grid">
