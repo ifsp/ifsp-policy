@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
             this.activeInput = null;
             this.keyboard = null;
             this.isVisible = false;
+            this.isInteracting = false; // Flag to prevent premature hiding
             this.init();
         }
 
@@ -117,15 +118,25 @@ document.addEventListener("DOMContentLoaded", function() {
                 input.addEventListener('blur', (e) => {
                     // Delay to allow keyboard clicks
                     setTimeout(() => {
-                        if (!this.keyboard.contains(document.activeElement)) {
+                        if (!this.isInteracting && !this.keyboard.contains(document.activeElement)) {
                             this.hideKeyboard();
                         }
-                    }, 100);
+                    }, 150); // Increased timeout for better reliability
                 });
             });
         }
 
         attachKeyboardEvents() {
+            // Set interacting flag when mouse enters keyboard
+            this.keyboard.addEventListener('mouseenter', () => {
+                this.isInteracting = true;
+            });
+
+            // Clear interacting flag when mouse leaves keyboard
+            this.keyboard.addEventListener('mouseleave', () => {
+                this.isInteracting = false;
+            });
+
             this.keyboard.addEventListener('click', (e) => {
                 if (e.target.classList.contains('keyboard-key')) {
                     e.preventDefault();
@@ -182,8 +193,12 @@ document.addEventListener("DOMContentLoaded", function() {
             // Trigger input event for search functionality
             input.dispatchEvent(new Event('input', { bubbles: true }));
 
-            // Keep focus on input
-            input.focus();
+            // Keep focus on input after a short delay to avoid blur conflicts
+            setTimeout(() => {
+                if (this.isVisible && this.activeInput === input) {
+                    input.focus();
+                }
+            }, 10);
         }
 
         toggleKeyboard(input) {
@@ -221,6 +236,7 @@ document.addEventListener("DOMContentLoaded", function() {
         hideKeyboard() {
             this.keyboard.classList.remove('show');
             this.isVisible = false;
+            this.isInteracting = false; // Reset interacting flag
             this.activeInput = null;
             this.keyboard.setAttribute('aria-hidden', 'true');
         }
