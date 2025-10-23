@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     // Carrega o rodapé no elemento com id="footer-placeholder"
-    loadComponent("#footer-placeholder", "../../_includes/footer.html").then(() => {
+    loadComponent("#footer-placeholder", "../_includes/footer.html").then(() => {
         // Após carregar o footer, substitui a data se houver
         const footerPlaceholder = document.getElementById('footer-placeholder');
         const lastUpdatedDate = footerPlaceholder ? footerPlaceholder.getAttribute('data-last-updated') : null;
