@@ -116,19 +116,81 @@ details[open] summary::after {
 }
 
 /* === BUSCA E OUTROS ELEMENTOS === */
+.search-card {
+    background: linear-gradient(135deg, var(--ifsp-verde), var(--ifsp-verde-escuro));
+    color: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.search-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="60" cy="80" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
+    opacity: 0.3;
+}
+
+.search-card-content {
+    position: relative;
+    z-index: 1;
+}
+
+.search-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.search-title::before {
+    content: "🔍";
+    font-size: 1.5rem;
+}
+
 #searchInput {
-    border: 2px solid #e4e4e7;
-    border-radius: 0.5rem;
-    padding: 0.75rem 1.25rem;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0.75rem;
+    padding: 1rem 1.5rem;
     width: 100%;
-    font-size: 1rem;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    font-size: 1.1rem;
+    background-color: rgba(255, 255, 255, 0.95);
+    color: var(--ifsp-cinza);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+#searchInput::placeholder {
+    color: #9ca3af;
+    font-style: italic;
 }
 
 #searchInput:focus {
     outline: none;
-    border-color: var(--ifsp-verde);
-    box-shadow: 0 0 0 3px rgba(0, 128, 64, 0.2);
+    border-color: rgba(255, 255, 255, 0.8);
+    background-color: white;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3), 0 8px 12px -2px rgb(0 0 0 / 0.15);
+    transform: translateY(-1px);
+}
+
+#noResultsMessage {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: 1rem;
+    font-weight: 500;
+    padding: 0.75rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .highlight {
@@ -154,11 +216,13 @@ details[open] summary::after {
     background-color: var(--ifsp-verde-escuro);
 }
 
-/* === CORES GLOBAIS === */
-:root {
-    --ifsp-verde: #008040;
-    --ifsp-verde-escuro: #004020;
-    --ifsp-cinza: #333333;
+/* === VISUAL SEPARATORS === */
+.section-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--ifsp-verde), transparent);
+    margin: 2rem 0;
+    border: none;
+    opacity: 0.6;
 }
 
 /* Adicione esta regra para centralizar o botão de forma robusta */
