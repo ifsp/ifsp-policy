@@ -23,28 +23,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Obtém a data e a substitui diretamente no arquivo
-      - name: Inject last commit date
+      # 2. Executa o script de build que injeta as datas automaticamente
+      - name: Build site with automatic date injection
         run: |
-          # Pega a data e a formata
-          FORMATTED_DATE=$(TZ="America/Sao_Paulo" git log -1 --format=%cI | date -d - +'%d/%m/%Y')
-          
-          # Exibe a data no log para sabermos que foi gerada corretamente
-          echo "Data formatada encontrada: $FORMATTED_DATE"
-          
-          # Exibe o conteúdo do arquivo ANTES da substituição para depuração
-          echo "--- Conteúdo do index.html ANTES da substituição ---"
-          cat index.html
-          echo "----------------------------------------------------"
-          
-          # Comando de substituição que cria um arquivo temporário e o move de volta.
-          # Esta é a forma mais segura de usar o 'sed' em scripts.
-          sed "s|__LAST_UPDATED__|${FORMATTED_DATE}|g" index.html > index.tmp && mv index.tmp index.html
-          
-          # Exibe o conteúdo do arquivo DEPOIS da substituição para confirmar
-          echo "--- Conteúdo do index.html DEPOIS da substituição ---"
-          cat index.html
-          echo "-----------------------------------------------------"
+          chmod +x build.sh
+          bash build.sh
 
       # 3. Prepara o ambiente para o GitHub Pages
       - name: Setup Pages
@@ -54,7 +37,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: 'dist'
 
       # 5. Publica no GitHub Pages
       - name: Deploy to GitHub Pages
