@@ -1,39 +1,59 @@
-# Nome do fluxo de trabalho
+# Nome do fluxo de trabalho que aparecerá na aba "Actions"
 name: Deploy to GitHub Pages
 
-# Gatilho
+# Gatilho: este fluxo de trabalho roda toda vez que houver um push na branch 'main'
 on:
   push:
     branches:
       - main
 
-# Permissões
+# Permissões necessárias para que o Actions possa publicar no Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Tarefa de deploy
+# Define um único job (tarefa) chamado 'deploy'
 jobs:
   deploy:
-    # --- INÍCIO DA ADIÇÃO NECESSÁRIA ---
+    # Declaração do ambiente de deploy, agora obrigatória pelo GitHub
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    # --- FIM DA ADIÇÃO NECESSÁRIA ---
+    
+    # Rodará em uma máquina virtual Linux
     runs-on: ubuntu-latest
+    
+    # Passos que o job executará em sequência
     steps:
+      # 1. Baixa o código do seu repositório para a máquina virtual
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # 2. Pega a data do último commit e a injeta no HTML
+      - name: Inject last commit date
+        run: |
+          # Pega a data do último commit, ajustada para o fuso horário de São Paulo (UTC-3)
+          COMMIT_DATE=$(TZ="America/Sao_Paulo" git log -1 --format=%cI)
+          
+          # Formata a data para o padrão dd/mm/yyyy
+          FORMATTED_DATE=$(date -d "$COMMIT_DATE" +'%d/%m/%Y')
+          
+          # Encontra e substitui o placeholder __LAST_UPDATED__ no arquivo index.html
+          sed -i "s|__LAST_UPDATED__|${FORMATTED_DATE}|g" index.html
+      
+      # 3. Prepara o ambiente para o GitHub Pages
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      # 4. Faz o upload dos arquivos do site (com a data já injetada) como um "artefato"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
+          # Faz o upload do diretório raiz
           path: '.'
 
+      # 5. Publica o artefato no GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

@@ -133,4 +133,10 @@
 
                 noResultsMessage.style.display = (itemsFound === 0 && searchTerm) ? 'block' : 'none';
             });
+            // --- Lógica do Ano Dinâmico no Rodapé ---
+            const currentYearElement = document.getElementById('current-year');
+                if (currentYearElement) {
+            // Preenche o ano atual.
+            currentYearElement.textContent = new Date().getFullYear();
+            }
         });
