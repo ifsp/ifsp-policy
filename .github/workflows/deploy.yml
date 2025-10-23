@@ -1,13 +1,10 @@
-# Nome do fluxo de trabalho
 name: Deploy to GitHub Pages
 
-# Gatilho
 on:
   push:
     branches:
       - main
 
-# Permissões
 permissions:
   contents: read
   pages: write
@@ -26,35 +23,40 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # --- INÍCIO DA MUDANÇA ---
-      # 2. Etapa para obter e formatar a data, e expô-la como uma "saída" (output)
-      - name: Get last commit date
-        id: get_date # Damos um ID a esta etapa para referenciar sua saída
+      # 2. Obtém a data e a substitui diretamente no arquivo
+      - name: Inject last commit date
         run: |
-          COMMIT_DATE=$(TZ="America/Sao_Paulo" git log -1 --format=%cI)
-          FORMATTED_DATE=$(date -d "$COMMIT_DATE" +'%d/%m/%Y')
-          echo "formatted_date=$FORMATTED_DATE" >> "$GITHUB_OUTPUT"
+          # Pega a data e a formata
+          FORMATTED_DATE=$(TZ="America/Sao_Paulo" git log -1 --format=%cI | date -d - +'%d/%m/%Y')
+          
+          # Exibe a data no log para sabermos que foi gerada corretamente
+          echo "Data formatada encontrada: $FORMATTED_DATE"
+          
+          # Exibe o conteúdo do arquivo ANTES da substituição para depuração
+          echo "--- Conteúdo do index.html ANTES da substituição ---"
+          cat index.html
+          echo "----------------------------------------------------"
+          
+          # Comando de substituição que cria um arquivo temporário e o move de volta.
+          # Esta é a forma mais segura de usar o 'sed' em scripts.
+          sed "s|__LAST_UPDATED__|${FORMATTED_DATE}|g" index.html > index.tmp && mv index.tmp index.html
+          
+          # Exibe o conteúdo do arquivo DEPOIS da substituição para confirmar
+          echo "--- Conteúdo do index.html DEPOIS da substituição ---"
+          cat index.html
+          echo "-----------------------------------------------------"
 
-      # 3. Usa uma Ação dedicada para encontrar e substituir o texto de forma segura
-      - name: Replace placeholder with date
-        uses: jacobtomlinson/gha-find-replace@v3
-        with:
-          find: "__LAST_UPDATED__"
-          replace: "${{ steps.get_date.outputs.formatted_date }}" # Pega a saída da etapa anterior
-          include: "index.html"
-      # --- FIM DA MUDANÇA ---
-      
-      # 4. Prepara o ambiente para o GitHub Pages
+      # 3. Prepara o ambiente para o GitHub Pages
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      # 5. Faz o upload do artefato (com o texto já substituído)
+      # 4. Faz o upload do artefato
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
 
-      # 6. Publica no GitHub Pages
+      # 5. Publica no GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
