@@ -1,4 +1,10 @@
 /* === GERAL E LAYOUT === */
+:root {
+    --ifsp-verde: #009900; /* Verde IFSP principal - mais claro */
+    --ifsp-verde-escuro: #006600; /* Verde IFSP mais escuro */
+    --ifsp-cinza: #6b7280; /* Cinza para texto */
+}
+
 body {
     font-family: 'Inter', sans-serif;
     background-color: #f4f4f5; /* zinc-100 */
@@ -150,6 +156,7 @@ details[open] summary::after {
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    color: white; /* Override the inherited green color from main h2 */
 }
 
 .search-title::before {
@@ -235,7 +242,7 @@ details[open] summary::after {
 }
 
 /* === FOOTER === */
-footer {
+.footer-container {
     padding: 2rem 1.5rem;
     color: #52525b;
     font-size: 0.9rem;
